@@ -155,10 +155,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicConsoleApp.cpp" />
+    <ClCompile Include="BattleController.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterFactory.cpp" />
+    <ClCompile Include="Hud.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleController.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterFactory.h" />
+    <ClInclude Include="Hud.h" />
+    <ClInclude Include="PropertyExtension.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
