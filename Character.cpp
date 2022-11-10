@@ -1,26 +1,23 @@
 ﻿#include "Character.h"
-
-#include <iostream>
 #include <string>
-
 
 Character::Character(std::string name, int level)
 {
     _name = name;
     _currentLevel = level;
-    _hp = level * 10;
+    _maxHp = _hp = level * 10;    
     _attack = level * 2;
     _defending = false;
 }
 
-void Character::Hello()
+std::string Character::Hello()
 {
-    std::cout << "Hello from " + _name + " my level is " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp);
+    return  "Hello from " + _name + " my level is " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp);
 }
 
-void Character::Status()
+std::string Character::Status()
 {
-    std::cout << "Character " + _name + " Lv: " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp);
+   return  "Character " + _name + " Lv: " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp)+"/"+std::to_string(_maxHp);
 }
 
 void Character::Damage(int attack)
@@ -40,4 +37,5 @@ void Character::ReleaseDefense()
 void Character::Heal()
 {
     _defending = false;
+    _hp = std::min(_maxHp, _hp + 5);
 }

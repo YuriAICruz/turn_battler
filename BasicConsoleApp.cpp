@@ -3,24 +3,28 @@
 #include "BattleController.h"
 #include "CharacterFactory.h"
 #include "Hud.h"
+#include "Logger.h"
 
 std::string name;
 
 int main(int argc, char* argv[])
 {
-    auto hud = new Hud();
-    auto factory = new CharacterFactory();
-    auto battle = new BattleController();
+    auto logger = new Logger();
+    auto hud = new Hud(logger);
+    auto factory = new CharacterFactory(logger);
+    auto battle = new BattleController(logger);
 
     auto name = hud->AskPlayerName();
 
     auto character = factory->Create(name, 1);
-    character->Hello();
+    logger->Say(character->Hello());
     auto enemy = factory->Create("Enemy", 1);
-    enemy->Hello();
+    logger->Say(enemy->Hello());
 
-    while (enemy->Hp > 0 || character->Hp > 0)
+    int turn = 0;
+    while (enemy->Hp > 0 && character->Hp > 0)
     {
+        logger->Say("Current turn [" + std::to_string(turn + 1) + "]");
         auto action = hud->AwaitSelectAction();
 
         if (action <= 0 || action > 3)
@@ -39,13 +43,15 @@ int main(int argc, char* argv[])
         case 3:
             battle->Heal(character);
             break;
+        default: throw std::logic_error("Function not yet implemented");
         }
 
         battle->Attack(enemy, character);
+        turn ++;
     }
-    
-    character->Status();
-    enemy->Status();
+
+    logger->Say("Battle Ended!");
+    logger->Say(character->Status() + " - " + enemy->Status());
 
     return 0;
 }

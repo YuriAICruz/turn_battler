@@ -4,19 +4,23 @@
 
 #include "Character.h"
 
+
+Hud::Hud(Logger* logger)
+{
+    _logger = logger;
+}
+
 std::string Hud::AskPlayerName()
 {
-    std::cout << "Enter Name:";
     std::string name;
-    std::cin >> name;
+    name = _logger->Ask("Enter Name:");
     return name;
 }
 
 int Hud::AwaitSelectAction()
 {
-    std::cout << "Select Action\n1: Attack 2:Defend 3:Heal";
     std::string actionStr;
-    std::cin >> actionStr;
+    actionStr = _logger->Ask("Select Action\n1: Attack 2:Defend 3:Heal\n");
 
     int action = stoi(actionStr);
     

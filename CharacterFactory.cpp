@@ -1,7 +1,8 @@
 ﻿#include "CharacterFactory.h"
 
-CharacterFactory::CharacterFactory()
+CharacterFactory::CharacterFactory(Logger* logger)
 {
+    _logger = logger;
 }
 
 Character* CharacterFactory::Create(std::string name, int level)
