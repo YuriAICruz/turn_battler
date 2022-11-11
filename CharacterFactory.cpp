@@ -1,12 +1,14 @@
 ﻿#include "CharacterFactory.h"
 
+#include <utility>
+
 CharacterFactory::CharacterFactory(Logger* logger)
 {
-    _logger = logger;
+    logger_ = logger;
 }
 
-Character* CharacterFactory::Create(std::string name, int level)
+Character* CharacterFactory::create(std::string name, int level)
 {
-    auto character = new Character(name, 1);
+    const auto character = new Character(std::move(name), 1);
     return character;
 }

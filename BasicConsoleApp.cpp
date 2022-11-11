@@ -9,23 +9,21 @@ std::string name;
 
 int main(int argc, char* argv[])
 {
-    auto logger = new Logger();
-    auto hud = new Hud(logger);
-    auto factory = new CharacterFactory(logger);
-    auto battle = new BattleController(logger);
+    const auto logger = new Logger();
+    const auto hud = new Hud(logger);
+    const auto factory = new CharacterFactory(logger);
+    const auto battle = new BattleController(logger);
 
-    auto name = hud->AskPlayerName();
-
-    auto character = factory->Create(name, 1);
-    logger->Say(character->Hello());
-    auto enemy = factory->Create("Enemy", 1);
-    logger->Say(enemy->Hello());
+    const auto character = factory->create(hud->askPlayerName(), 1);
+    logger->say(character->hello());
+    const auto enemy = factory->create("Enemy", 1);
+    logger->say(enemy->hello());
 
     int turn = 0;
     while (enemy->Hp > 0 && character->Hp > 0)
     {
-        logger->Say("Current turn [" + std::to_string(turn + 1) + "]");
-        auto action = hud->AwaitSelectAction();
+        logger->say("Current turn [" + std::to_string(turn + 1) + "]");
+        const auto action = hud->awaitSelectAction();
 
         if (action <= 0 || action > 3)
         {
@@ -35,23 +33,23 @@ int main(int argc, char* argv[])
         switch (action)
         {
         case 1:
-            battle->Attack(character, enemy);
+            battle->attack(character, enemy);
             break;
         case 2:
-            battle->Defend(character);
+            battle->defend(character);
             break;
         case 3:
-            battle->Heal(character);
+            battle->heal(character);
             break;
         default: throw std::logic_error("Function not yet implemented");
         }
 
-        battle->Attack(enemy, character);
+        battle->attack(enemy, character);
         turn ++;
     }
 
-    logger->Say("Battle Ended!");
-    logger->Say(character->Status() + " - " + enemy->Status());
+    logger->say("Battle Ended!");
+    logger->say(character->status() + " - " + enemy->status());
 
     return 0;
 }

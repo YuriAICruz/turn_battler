@@ -2,25 +2,25 @@
 
 BattleController::BattleController(Logger* logger)
 {
-    _logger = logger;
+    logger_ = logger;
 }
 
-void BattleController::Attack(Character* base, Character* other)
+void BattleController::attack(Character* base, Character* other) const
 {
-    base->ReleaseDefense();
-    other->Damage(base->Attack);
-    _logger->Say(base->Name + " attacked " + other->Name);
-    _logger->ShowStatus(other);
+    base->releaseDefense();
+    other->damage(base->Attack);
+    logger_->say(base->Name + " attacked " + other->Name);
+    logger_->showStatus(other);
 }
 
-void BattleController::Defend(Character* base)
+void BattleController::defend(Character* base) const
 {
-    _logger->Say(base->Name + " defending");
-    base->Defend();
+    logger_->say(base->Name + " defending");
+    base->defend();
 }
 
-void BattleController::Heal(Character* base)
+void BattleController::heal(Character* base) const
 {
-    base->Heal();
-    _logger->ShowStatus(base);
+    base->heal();
+    logger_->showStatus(base);
 }

@@ -7,8 +7,8 @@
 class CharacterFactory
 {
 public:
-    CharacterFactory(Logger* logger);
-    Character* Create(std::string name, int level);
+    explicit CharacterFactory(Logger* logger);
+    static Character* create(std::string name, int level);
 private:
-    Logger* _logger;
+    Logger* logger_;
 };

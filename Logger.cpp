@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-Logger::Logger()
-{
-}
+Logger::Logger() = default;
 
-std::string Logger::Ask(std::string question)
+std::string Logger::ask(std::string question)
 {
     std::string response;
     std::cout << question;
@@ -14,12 +12,12 @@ std::string Logger::Ask(std::string question)
     return response;
 }
 
-void Logger::Say(const std::string& title)
+void Logger::say(const std::string& title)
 {
     std::cout << title + "\n";
 }
 
-void Logger::ShowStatus(Character* character)
+void Logger::showStatus(const Character* character)
 {
-    std::cout << character->Status() + "\n";
+    std::cout << character->status() + "\n";
 }

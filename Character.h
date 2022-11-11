@@ -1,18 +1,17 @@
 ﻿#pragma once
 #include <xstring>
-
 #include "PropertyExtension.h"
 
 class Character
 {
 public:
     Character(std::string name, int level);
-    std::string Hello();
-    std::string Status();
-    void Damage(int attack);
-    void Defend();
-    void ReleaseDefense();
-    void Heal();
+    std::string hello() const;
+    std::string status() const;
+    void damage(int attack);
+    void defend();
+    void releaseDefense();
+    void heal();
     
     READONLY_PROPERTY(int, Hp);
     READONLY_PROPERTY(int, MaxHp);
@@ -20,25 +19,25 @@ public:
     READONLY_PROPERTY(int, Attack);
     GET(Hp) 
     { 
-        return _hp; 
+        return hp_; 
     }
     GET(MaxHp) 
     { 
-        return _maxHp; 
+        return maxHp_; 
     }
     GET(Attack) 
     { 
-        return _attack;
+        return attack_;
     }
     GET(Name) 
     { 
-        return _name;
+        return name_;
     }
 private:
-    std::string _name;
-    int _currentLevel;
-    bool _defending;
-    int _hp;
-    int _attack;
-    int _maxHp;
+    std::string name_;
+    int currentLevel_;
+    bool defending_;
+    int hp_;
+    int attack_;
+    int maxHp_;
 };

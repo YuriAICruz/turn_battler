@@ -7,22 +7,19 @@
 
 Hud::Hud(Logger* logger)
 {
-    _logger = logger;
+    logger_ = logger;
 }
 
-std::string Hud::AskPlayerName()
+std::string Hud::askPlayerName() const
 {
     std::string name;
-    name = _logger->Ask("Enter Name:");
+    name = logger_->ask("Enter Name:");
     return name;
 }
 
-int Hud::AwaitSelectAction()
+int Hud::awaitSelectAction() const
 {
-    std::string actionStr;
-    actionStr = _logger->Ask("Select Action\n1: Attack 2:Defend 3:Heal\n");
-
-    int action = stoi(actionStr);
+    const int action = stoi(logger_->ask("Select Action\n1: Attack 2:Defend 3:Heal\n"));
     
     if(action <= 0)
     {

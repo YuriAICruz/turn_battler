@@ -6,9 +6,9 @@
 class Hud
 {
 public:
-    Hud(Logger* logger);
-    std::string AskPlayerName();
-    int AwaitSelectAction();
+    explicit Hud(Logger* logger);
+    std::string askPlayerName() const;
+    int awaitSelectAction() const;
 private:
-    Logger* _logger;
+    Logger* logger_;
 };

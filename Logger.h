@@ -7,7 +7,7 @@ class Logger
 {
 public:
     Logger();
-    std::string Ask(std::string question);
-    void Say(const std::string& title);
-    void ShowStatus(Character* character);
+    static std::string ask(std::string question);
+    static void say(const std::string& title);
+    static void showStatus(const Character* character);
 };

@@ -1,41 +1,42 @@
 ﻿#include "Character.h"
 #include <string>
+#include <utility>
 
-Character::Character(std::string name, int level)
+Character::Character(std::string name, const int level)
 {
-    _name = name;
-    _currentLevel = level;
-    _maxHp = _hp = level * 10;    
-    _attack = level * 2;
-    _defending = false;
+    name_ = std::move(name);
+    currentLevel_ = level;
+    maxHp_ = hp_ = level * 10;    
+    attack_ = level * 2;
+    defending_ = false;
 }
 
-std::string Character::Hello()
+std::string Character::hello() const
 {
-    return  "Hello from " + _name + " my level is " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp);
+    return  "Hello from " + name_ + " my level is " + std::to_string(currentLevel_) + " HP: " + std::to_string(hp_);
 }
 
-std::string Character::Status()
+std::string Character::status() const
 {
-   return  "Character " + _name + " Lv: " + std::to_string(_currentLevel) + " HP: " + std::to_string(_hp)+"/"+std::to_string(_maxHp);
+   return  "Character " + name_ + " Lv: " + std::to_string(currentLevel_) + " HP: " + std::to_string(hp_)+"/"+std::to_string(maxHp_);
 }
 
-void Character::Damage(int attack)
+void Character::damage(const int attack)
 {
-    _hp -= static_cast<int>(attack * (_defending ? 0.5 : 1));
+    hp_ -= static_cast<int>(attack * (defending_ ? 0.5 : 1));
 }
 
-void Character::Defend()
+void Character::defend()
 {
-    _defending = true;
+    defending_ = true;
 }
-void Character::ReleaseDefense()
+void Character::releaseDefense()
 {
-    _defending = false;
+    defending_ = false;
 }
 
-void Character::Heal()
+void Character::heal()
 {
-    _defending = false;
-    _hp = std::min(_maxHp, _hp + 5);
+    defending_ = false;
+    hp_ = std::min(maxHp_, hp_ + 5);
 }
