@@ -2,6 +2,8 @@
 
 #include "BattleController.h"
 #include "CharacterFactory.h"
+#include "Event.h"
+#include "EventCallback.h"
 #include "Hud.h"
 #include "Logger.h"
 
@@ -18,6 +20,13 @@ int main(int argc, char* argv[])
     logger->say(character->hello());
     const auto enemy = factory->create("Enemy", 1);
     logger->say(enemy->hello());
+
+    auto event = new EventCallback<Character>(character, &Character::defend);
+    auto eventB = new EventCallback<Character>(character, &Character::heal);
+    auto eventManager = new Event();
+    eventManager->addListener(event);
+    eventManager->addListener(eventB);
+    eventManager->fire();
 
     int turn = 0;
     while (enemy->Hp > 0 && character->Hp > 0)
